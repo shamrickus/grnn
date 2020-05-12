@@ -4,6 +4,10 @@ CPPFLAGS := -O3 -std=c++11
 CUDAFLAGS := -arch=compute_70 -code=sm_70 -D_FORCE_INLINES --ptxas-options='-v -warn-lmem-usage -warn-spills' --nvlink-options='-v'
 DEBUGFLAGS := -D DEBUG
 
+.PHONY: all
+all:
+	LSTM GRU_single GRU_double
+
 ### Regular compilation rules
 bin/LSTM.o: LSTM.cu LSTM.h RNNBase.h misc.h
 	$(CXX) -c $< -o $@ $(CPPFLAGS) $(CUDAFLAGS)
